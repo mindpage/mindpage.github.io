@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>表单数据说明 · MindPage</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;p&gt;mindpage内置了足够多的表单控件，通过数据驱动，可快速配置出组件对应的设置面板。&lt;/p&gt;
+"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="表单数据说明 · MindPage"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mindpage.github.io/"/><meta property="og:description" content="&lt;p&gt;mindpage内置了足够多的表单控件，通过数据驱动，可快速配置出组件对应的设置面板。&lt;/p&gt;
+"/><meta property="og:image" content="https://mindpage.github.io/img/docusaurus.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://mindpage.github.io/img/docusaurus.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><h2 class="headerTitle">MindPage</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/tutorial/intro" target="_self">使用文档</a></li><li class=""><a href="/docs/components/intro" target="_self">组件列表</a></li><li class="siteNavGroupActive"><a href="/docs/development/intro" target="_self">组件开发</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>组件开发</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">组件开发<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/development/intro">组件开发规范说明</a></li><li class="navListItem"><a class="navItem" href="/docs/development/">入口文件</a></li><li class="navListItem"><a class="navItem" href="/docs/development/template">组件模板</a></li><li class="navListItem"><a class="navItem" href="/docs/development/defaultdata">组件数据</a></li><li class="navListItem"><a class="navItem" href="/docs/development/prepic">预览图</a></li><li class="navListItem"><a class="navItem" href="/docs/development/settingform">设置面板</a></li><li class="navListItem"><a class="navItem" href="/docs/development/publish">组件发布</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/development/formfields">表单数据说明</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">表单数据说明</h1></header><article><div><span><p>mindpage内置了足够多的表单控件，通过数据驱动，可快速配置出组件对应的设置面板。</p>
+<p>类型为数组Array，每个item是一个设置项，可嵌套。</p>
+<p>例如：</p>
+<pre><code class="hljs">[
+    {
+        <span class="hljs-string">...</span><span class="hljs-string">"单个控件数据"</span><span class="hljs-string">...</span>
+    },
+    {
+        <span class="hljs-string">...</span><span class="hljs-string">"单个控件数据"</span><span class="hljs-string">...</span>
+    },
+    {
+        <span class="hljs-string">...</span><span class="hljs-string">"单个控件数据"</span><span class="hljs-string">...</span>
+    },
+]
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="单个控件格式说明"></a><a href="#单个控件格式说明" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>单个控件格式说明</h2>
+<p>下面是单个控件的完成格式，以及各个参数的含义说明</p>
+<h3><a class="anchor" aria-hidden="true" id="数据格式"></a><a href="#数据格式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>数据格式</h3>
+<pre><code class="hljs">{
+    <span class="hljs-attr">"label"</span>: <span class="hljs-string">"背景图片"</span>,
+    <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"card_type"</span>,
+    <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"input"</span>,
+    <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"string"</span>,
+    <span class="hljs-attr">"require"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"ogName"</span>: <span class="hljs-string">"newflag"</span>,
+    <span class="hljs-attr">"input"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"hidden"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"card_type"</span>,
+        <span class="hljs-attr">"value"</span>: <span class="hljs-string">"PcVideo"</span>,
+        <span class="hljs-attr">"placeholder"</span>:<span class="hljs-string">""</span>,
+        <span class="hljs-attr">"readonly"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"verify"</span>:<span class="hljs-string">"acttype=number&amp;errmsg=错误提示语"</span>
+        <span class="hljs-string">"checkType"</span>:<span class="hljs-string">"weibo"</span>,
+        <span class="hljs-attr">"action_type"</span>:<span class="hljs-string">"changeState"</span>,
+        <span class="hljs-attr">"action_data"</span>: <span class="hljs-string">"target=file&amp;state=1"</span>,
+        <span class="hljs-attr">"pic_require"</span>:<span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"file_require"</span>:<span class="hljs-literal">true</span>
+    }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="参数含义"></a><a href="#参数含义" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>参数含义</h3>
+<blockquote>
+<ul>
+<li>label：控件标题，表示控件的含义和作用</li>
+<li>foreign-key：控件的key值</li>
+<li>form-type：控件类型，分别为<code>input</code>, <code>image</code>, <code>icon</code>, <code>file</code>, <code>array</code>, <code>object</code>, <code>buttons</code></li>
+<li>data-type：表示控件值的类型，分别为<code>string</code>、<code>int</code>、<code>array</code>、<code>object</code>、<code>buttons</code>、在保存数据时，会根据data-type对数据做格式处理</li>
+<li>require：适用于form_type:input/image的控件用，表示是否为必填</li>
+<li>ogName：适用于form_type:input且type是radio, checkbox的控件用，值就是对应的key</li>
+<li>input：
+<ul>
+<li>type: input控件的类型，分别为<code>hidden</code>, <code>text</code>, <code>number</code>, <code>radio</code>, <code>checkbox</code>, <code>textarea</code></li>
+<li>name: 控件的key值，和foreign-key一样</li>
+<li>value: 控件的值</li>
+<li>placeholder: 控件输入框内的提示语，建议尽量配置，增加用户可读性。</li>
+<li>verify: 检验规则，具体参考</li>
+<li>readonly: 控件是否为只读控件</li>
+<li>checkType: 通过对应值(mid、uid)，获取平台数据，目前有：&quot;weibo&quot;、&quot;user&quot;</li>
+<li>action_type:</li>
+<li>action_data:</li>
+<li>pic_require: 适用于form_type:image的控件，表示是否为必填</li>
+<li>file_require: 适用于form_type:file的控件，表示是否为必填</li>
+</ul></li>
+</ul>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="控件数据说明"></a><a href="#控件数据说明" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>控件数据说明</h2>
+<h3><a class="anchor" aria-hidden="true" id="输入框-input"></a><a href="#输入框-input" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>输入框[input]</h3>
+<p>示例</p>
+<p>card中数据：</p>
+<pre><code class="hljs css language-json">    "width": 200
+</code></pre>
+<p>表单控件数据：</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"label"</span>: <span class="hljs-string">"图片宽度"</span>,
+    <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"input"</span>,
+    <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"int"</span>,
+    <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"width"</span>,
+    <span class="hljs-attr">"input"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"width"</span>,
+        <span class="hljs-attr">"verify"</span>: <span class="hljs-string">"acttype=notEmpty|number&amp;errmsg=请输入图片宽度||图片宽度只能为数字"</span>
+    }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="图片-image"></a><a href="#图片-image" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>图片[image]</h3>
+<p>示例</p>
+<p>card中数据：</p>
+<pre><code class="hljs css language-json">    "profile_image_url": ""
+</code></pre>
+<p>表单控件数据：</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"label"</span>: <span class="hljs-string">"头像图片"</span>,
+    <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"image"</span>,
+    <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"string"</span>,
+    <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"profile_image_url"</span>,
+    <span class="hljs-attr">"input"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"hidden"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"profile_image_url"</span>
+    }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="对象-object"></a><a href="#对象-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>对象[object]</h3>
+<p>示例</p>
+<p>card中数据：</p>
+<pre><code class="hljs css language-json">    "btn_url": {
+        "scheme": "sinaweibo://sendweibo",
+        "url": "http://weibo.cn/qr/sendweibo"
+    }
+</code></pre>
+<p>表单控件数据：</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"label"</span>: <span class="hljs-string">"按钮链接"</span>,
+    <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"object"</span>,
+    <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"object"</span>,
+    <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"btn_url"</span>,
+    <span class="hljs-attr">"params"</span>: [
+        {
+            <span class="hljs-attr">"label"</span>: <span class="hljs-string">"端内链接"</span>,
+            <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"input"</span>,
+            <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"string"</span>,
+            <span class="hljs-attr">"require"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"scheme"</span>,
+            <span class="hljs-attr">"input"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"scheme"</span>,
+                <span class="hljs-attr">"verify"</span>: <span class="hljs-string">"acttype=scheme&amp;errmsg=请填写正确的scheme地址"</span>
+            }
+        },
+        {
+            <span class="hljs-attr">"label"</span>: <span class="hljs-string">"端外链接"</span>,
+            <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"input"</span>,
+            <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"string"</span>,
+            <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"url"</span>,
+            <span class="hljs-attr">"input"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"url"</span>,
+                <span class="hljs-attr">"verify"</span>: <span class="hljs-string">"acttype=url&amp;errmsg=请填写正确的url"</span>
+            }
+        }
+    ]
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="数组-array"></a><a href="#数组-array" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>数组[array]</h3>
+<p>示例</p>
+<p>card中数据：</p>
+<pre><code class="hljs css language-json">    "pics": [
+        {
+            "pic": "http://ww3.sinaimg.cn/large/6455dcafjw1ev822wjdfej20gm06u402.jpg",
+            "desc": "图片1",
+            "url": "https://www.sina.cn"
+        },
+        {
+            "pic": "http://ww1.sinaimg.cn/large/571e05d1jw1evemtiky4wj20cx08cdgd.jpg",
+            "desc": "图片2",
+            "url": "https://www.sina.cn"
+        }
+    ],
+</code></pre>
+<p>表单控件数据：</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"label"</span>: <span class="hljs-string">"图片"</span>,
+    <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"array"</span>,
+    <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"array"</span>,
+    <span class="hljs-attr">"data-key"</span>: <span class="hljs-string">"pics"</span>,
+    <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"pics"</span>,
+    <span class="hljs-attr">"require"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"array-item"</span>: [
+        {
+            <span class="hljs-attr">"label"</span>: <span class="hljs-string">"图片链接"</span>,
+            <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"image"</span>,
+            <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"string"</span>,
+            <span class="hljs-attr">"require"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"pic"</span>,
+            <span class="hljs-attr">"input"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"hidden"</span>,
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"pic"</span>
+            }
+        }, {
+            <span class="hljs-attr">"label"</span>: <span class="hljs-string">"描述"</span>,
+            <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"input"</span>,
+            <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"string"</span>,
+            <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"desc"</span>,
+            <span class="hljs-attr">"input"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"desc"</span>,
+                <span class="hljs-attr">"verify"</span>: <span class="hljs-string">"acttype=max&amp;errmsg=请填写正确的图片信息"</span>,
+                <span class="hljs-attr">"vmax"</span>: <span class="hljs-string">"40"</span>
+            }
+        }, {
+            <span class="hljs-attr">"label"</span>: <span class="hljs-string">"图片跳转链接"</span>,
+            <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"input"</span>,
+            <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"string"</span>,
+            <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"url"</span>,
+            <span class="hljs-attr">"input"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"url"</span>,
+                <span class="hljs-attr">"verify"</span>: <span class="hljs-string">"acttype=scheme&amp;errmsg=请填写正确的链接地址"</span>
+            }
+        }
+    ]
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="按钮-buttons"></a><a href="#按钮-buttons" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>按钮[buttons]</h3>
+<p>示例</p>
+<p>card中数据：</p>
+<pre><code class="hljs css language-json">    "buttons": []
+</code></pre>
+<p>表单控件数据：</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"label"</span>: <span class="hljs-string">"按钮"</span>,
+    <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"buttons"</span>,
+    <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"buttons"</span>,
+    <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"buttons"</span>
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="图标-icon"></a><a href="#图标-icon" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>图标[icon]</h3>
+<p>示例</p>
+<p>card中数据：</p>
+<pre><code class="hljs css language-json">    "icon": "",
+</code></pre>
+<p>表单控件数据：</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"label"</span>: <span class="hljs-string">"按钮图标"</span>,
+    <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"icon"</span>,
+    <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"string"</span>,
+    <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"icon"</span>,
+    <span class="hljs-attr">"input"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"hidden"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"icon"</span>
+    }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="文件-file"></a><a href="#文件-file" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>文件[file]</h3>
+<p>示例</p>
+<p>card中数据：</p>
+<pre><code class="hljs css language-json">    "file": "",
+</code></pre>
+<p>表单控件数据：</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"form-type"</span>: <span class="hljs-string">"file"</span>,
+    <span class="hljs-attr">"data-type"</span>: <span class="hljs-string">"string"</span>,
+    <span class="hljs-attr">"foreign-key"</span>: <span class="hljs-string">"file"</span>,
+    <span class="hljs-attr">"input"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"hidden"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"file"</span>,
+        <span class="hljs-attr">"verify"</span>: <span class="hljs-string">"acttype=fileType&amp;errmsg=请上传.csv类型文件"</span>
+    }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="设置范例"></a><a href="#设置范例" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>设置范例</h2>
+<p>下面列出了一些范例，帮助大家更直观的了解表单数据设置。</p>
+<h3><a class="anchor" aria-hidden="true" id="范例1"></a><a href="#范例1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>范例1</h3>
+<p><img src="" alt=""></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/development/publish"><span class="arrow-prev">← </span><span>组件发布</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#单个控件格式说明">单个控件格式说明</a><ul class="toc-headings"><li><a href="#数据格式">数据格式</a></li><li><a href="#参数含义">参数含义</a></li></ul></li><li><a href="#控件数据说明">控件数据说明</a><ul class="toc-headings"><li><a href="#输入框-input">输入框[input]</a></li><li><a href="#图片-image">图片[image]</a></li><li><a href="#对象-object">对象[object]</a></li><li><a href="#数组-array">数组[array]</a></li><li><a href="#按钮-buttons">按钮[buttons]</a></li><li><a href="#图标-icon">图标[icon]</a></li><li><a href="#文件-file">文件[file]</a></li></ul></li><li><a href="#设置范例">设置范例</a><ul class="toc-headings"><li><a href="#范例1">范例1</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2019 weibo.com</section></footer></div></body></html>
